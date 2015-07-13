@@ -52,6 +52,7 @@ before = get_entries
 while true
   after = get_entries
   if before != after
+    p("変更ありました")
     after.keys.each do |academician|  #get diff
       if after[academician] != before[academician]
         client.update("#{academician}\n"+
@@ -60,11 +61,6 @@ while true
                       "IS:"+"#{before[academician]["IS"]}"+"=>"+"#{after[academician]["IS"]}\n"+
                       "ID:"+"#{before[academician]["ID"]}"+"=>"+"#{after[academician]["ID"]}"
         )
-        p academician
-        p ("定員:" + after[academician]["定員"])
-        p ("CS:" + before[academician]["CS"] + "=>" + after[academician]["CS"])
-        p ("IS:" + before[academician]["IS"] + "=>" + after[academician]["IS"])
-        p ("ID:" + before[academician]["ID"] + "=>" + after[academician]["ID"])
       end
     end
     before = after
