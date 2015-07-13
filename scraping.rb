@@ -1,13 +1,13 @@
 require 'twitter'
 require 'mechanize'
 
-CONSUMER_KEY = "LnTrHw1DoSIF9Le0QfXJkpA4a"
-CONSUMER_SECRET = "PSzkOgqsozypFMaVI7UkDiJpI45i1nTAwAPgf0eZH3IRCDUJ8j"
-OAUTH_TOKEN = "3277253898-N5YjOWRa5MKsg7bfzkG7QcCQjVPm7HHtFB9m4IE"
-OAUTH_TOKEN_SECRET = "i7896z0kRWSeuKxZkJw6mduo0EavJTWYnNiNzlCLu2MA5"
+CONSUMER_KEY = ""
+CONSUMER_SECRET = ""
+OAUTH_TOKEN = ""
+OAUTH_TOKEN_SECRET = ""
 
-NAME = 'ia13023'
-PASS = 'twttk-admin-5509'
+NAME = ''
+PASS = ''
 
 @LOGIN_URL = 'https://tech.inf.in.shizuoka.ac.jp/labentry/index.php/stuentrylist'
 @LABS_URL = 'https://tech.inf.in.shizuoka.ac.jp/labentry/index.php/labentrylist'
@@ -52,14 +52,14 @@ before = get_entries
 while true
   after = get_entries
   if before != after
-    p("変更ありました")
     after.keys.each do |academician|  #get diff
       if after[academician] != before[academician]
         client.update("#{academician}\n"+
                       "定員:#{after[academician]["定員"]}\n"+
-                      "CS:#{after[academician]["CS"]}\n"+
-                      "IS:#{after[academician]["IS"]}\n"+
-                      "ID:#{after[academician]["ID"]}\n")
+                      "CS:"+"#{before[academician]["CS"]}"+"=>"+"#{after[academician]["CS"]}\n"+
+                      "IS:"+"#{before[academician]["IS"]}"+"=>"+"#{after[academician]["IS"]}\n"+
+                      "ID:"+"#{before[academician]["ID"]}"+"=>"+"#{after[academician]["ID"]}"
+        )
         p academician
         p ("定員:" + after[academician]["定員"])
         p ("CS:" + before[academician]["CS"] + "=>" + after[academician]["CS"])
@@ -69,12 +69,6 @@ while true
     end
     before = after
   end
-  p ("--------before------------")
-  p before
-  p ("--------after-------------")
-  p after
-  sleep(10)
-  p ("--------next--------------")
 end
 
 
